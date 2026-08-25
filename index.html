@@ -99,6 +99,12 @@
   }
   .card.blue{ background:var(--blue); color:var(--paper); }
   .card.blue .t2 .w{ color:#cdd2ff; }
+  .card.ink{ background:var(--ink); color:var(--paper); }
+  .card.ink .t2 .v{ color:var(--verm); }
+  .card.ink .cb{ color:rgba(246,243,234,.55); }
+  .card.ink .prog i{ background:rgba(246,243,234,.25); }
+  .card.ink .prog i.f{ background:var(--verm); }
+
   .card.verm{ background:var(--verm); color:var(--paper); }
   .card.verm .t2 .v{ color:#ffd9c9; }
   .card.verm .body{ color:rgba(246,243,234,.85); }
@@ -111,10 +117,9 @@
   .card.blue .body b{ color:var(--paper); }
 
   /* the gap card: two sides, held apart */
-  .gapcard .inner{ display:flex; flex-direction:column; min-height:62svh; }
+  .gapcard .inner{ display:flex; flex-direction:column; justify-content:space-between; min-height:72svh; }
   .gapcard .sideA{ align-self:flex-start; }
   .gapcard .sideB{ align-self:flex-end; text-align:right; }
-  .gapcard .mid{ margin:auto 0; padding:5vh 0; }
 
   .cta{
     display:inline-block; margin-top:5vh; text-decoration:none;
@@ -160,7 +165,7 @@
       <p class="k rise">A manifesto</p>
       <h1 class="t1 rise">For the first time in human history, every business has <span class="w">perfect&nbsp;memory.</span></h1>
     </div>
-    <div class="cb"><span>01 / 11</span><span class="prog"><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>01 / 12</span><span class="prog"><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card litany">
@@ -173,14 +178,14 @@
       <p class="rise">Every customer who almost converted — and didn't.</p>
       <p class="seal rise">All of it <b>recorded</b>. All of it <b>stored</b>. All of&nbsp;it&nbsp;<b>available</b>.</p>
     </div>
-    <div class="cb"><span>02 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>02 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card center">
     <div class="inner">
       <p class="t3 rise">We are living inside the most documented human experiment ever conducted.</p>
     </div>
-    <div class="cb"><span>03 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>03 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card blue">
@@ -189,7 +194,7 @@
       <p class="body rise">Not because the data is wrong. Because nobody taught them how to read it.</p>
       <p class="body rise">They built dashboards. They hired analysts. They bought tools. They generated reports.</p>
     </div>
-    <div class="cb"><span>04 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>04 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card tint-report">
@@ -198,18 +203,22 @@
       <p class="body rise">A spreadsheet tells you what happened. It cannot tell you why a person hesitated. It cannot tell you what they were afraid of. It cannot tell you what they needed to feel before they could say yes.</p>
       <p class="body rise">That requires something different. Not more data. <b>A different relationship with it.</b></p>
     </div>
-    <div class="cb"><span>05 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>05 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card gapcard">
     <div class="inner">
       <p class="body sideA rise">On one side: infinite information about human behaviour.</p>
-      <div class="mid rise">
-        <h2 class="t2">The gap between those two is where <span class="v">growth</span> is hiding.</h2>
-      </div>
       <p class="body sideB rise">On the other: businesses still guessing what their customers actually want.</p>
     </div>
-    <div class="cb"><span>06 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>06 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <section class="card ink">
+    <div class="inner">
+      <h2 class="t2 rise">The gap between those two is where <span class="v">growth</span> is hiding.</h2>
+    </div>
+    <div class="cb"><span>07 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card">
@@ -230,7 +239,7 @@
         </div>
       </div>
     </div>
-    <div class="cb"><span>07 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>08 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card verm">
@@ -239,7 +248,7 @@
       <h2 class="t2 rise" style="margin-top:4vh">I am not an archaeologist.</h2>
       <h2 class="t2 rise">I am a <span class="v">translator.</span></h2>
     </div>
-    <div class="cb"><span>08 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
+    <div class="cb"><span>09 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
   </section>
 
   <section class="card">
@@ -248,7 +257,7 @@
       <p class="body rise">Until I find the hidden shape of the thing — the pattern underneath the numbers that explains not just what happened but what it means and what to do next.</p>
       <p class="body rise">It is the rarest skill in business right now. It requires two things that almost never exist in the same person: <b>the precision to read data. And the taste to know what it means.</b></p>
     </div>
-    <div class="cb"><span>09 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
+    <div class="cb"><span>10 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
   </section>
 
   <section class="card blue">
@@ -257,7 +266,7 @@
       <p class="body rise" style="margin-top:3.5vh">The hidden shape of your customer. Your market. Your next move. <b>Once you see it — everything else follows.</b></p>
       <a class="cta rise" href="mailto:access@insanelabs.in">Bring me your data →</a>
     </div>
-    <div class="cb"><span>10 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
+    <div class="cb"><span>11 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
   </section>
 
 
@@ -285,7 +294,7 @@
         <span>Frozen <span class="d">·</span> 13 May 2026</span>
       </div>
     </div>
-    <div class="cb"><span>11 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
+    <div class="cb"><span>12 / 12</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
   </section>
 
 </main>
