@@ -144,9 +144,26 @@
   .reads .rn em{ font-style:normal; color:var(--verm); }
   .reads .rs{ font-size:clamp(14px,3.6vw,17px); color:var(--ink-70); margin-top:.8vh; }
 
-  .brandwall{ margin-top:4vh; display:flex; flex-wrap:wrap; align-items:center; gap:20px 30px; }
-  .brandwall img{ width:auto; filter:grayscale(1) opacity(.72); mix-blend-mode:multiply; }
-  .brandwall span{ font-size:clamp(14px,3.6vw,18px); color:var(--ink-70); white-space:nowrap; }
+  .brandgrid{
+    margin-top:4vh; display:grid; grid-template-columns:repeat(3,1fr);
+    gap:1px; background:var(--ink-20); border:1px solid var(--ink-20);
+  }
+  .brandgrid .cell{
+    background:var(--paper); min-height:76px; padding:14px 10px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .brandgrid img{
+    max-height:26px; max-width:84%; width:auto; height:auto;
+    filter:grayscale(1) opacity(.72); mix-blend-mode:multiply;
+  }
+  .brandgrid img.h20{ max-height:20px; }
+  .brandgrid img.h32{ max-height:32px; }
+  .brandgrid img.h40{ max-height:40px; }
+  .brandgrid .nm{
+    font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-70); line-height:1.5;
+  }
+  .brandgrid .more{ color:var(--verm); }
 
   .foot{
     margin-top:6vh; padding-top:3vh; border-top:1px solid var(--ink-20);
@@ -273,21 +290,22 @@
   <section class="card tall">
     <div class="inner">
       <p class="k rise">Over 110 brands across India and the GCC</p>
-      <div class="brandwall rise">
-        <img src="logos/mamaearth.png" alt="Mamaearth" style="height:20px">
-        <img src="logos/gynoveda.png" alt="Gynoveda" style="height:22px">
-        <img src="logos/joshtalks.svg" alt="Josh Talks" style="height:27px">
-        <img src="logos/mothersparsh.png" alt="Mother Sparsh" style="height:34px">
-        <img src="logos/vahdam.png" alt="Vahdam India" style="height:30px">
-        <img src="logos/nethradhama.png" alt="Nethradhama" style="height:21px">
-        <img src="logos/skillnation.png" alt="Skill Nation" style="height:27px">
-        <img src="logos/astro.png" alt="Astro Arun Pandit" style="height:38px">
-        <img src="logos/kamaayurveda.png" alt="Kama Ayurveda" style="height:36px">
-        <img src="logos/personaltouch.png" alt="Personal Touch" style="height:32px">
-        <img src="logos/growthschool.png" alt="GrowthSchool" style="height:23px">
-        <img src="logos/warikoo.png" alt="Ankur Warikoo" style="height:30px">
-        <span>Dot &amp; Key</span>
-        <span>The Batraa Numerology</span>
+      <div class="brandgrid rise">
+        <div class="cell"><img src="logos/mamaearth.png" alt="Mamaearth" class="h20"></div>
+        <div class="cell"><img src="logos/gynoveda.png" alt="Gynoveda" class="h20"></div>
+        <div class="cell"><img src="logos/kamaayurveda.png" alt="Kama Ayurveda" class="h32"></div>
+        <div class="cell"><img src="logos/joshtalks.svg" alt="Josh Talks" class="h32"></div>
+        <div class="cell"><img src="logos/mothersparsh.png" alt="Mother Sparsh" class="h40"></div>
+        <div class="cell"><img src="logos/vahdam.png" alt="Vahdam India" class="h32"></div>
+        <div class="cell"><img src="logos/nethradhama.png" alt="Nethradhama" class="h20"></div>
+        <div class="cell"><img src="logos/skillnation.png" alt="Skill Nation"></div>
+        <div class="cell"><img src="logos/astro.png" alt="Astro Arun Pandit" class="h40"></div>
+        <div class="cell"><img src="logos/personaltouch.png" alt="Personal Touch" class="h32"></div>
+        <div class="cell"><img src="logos/growthschool.png" alt="GrowthSchool"></div>
+        <div class="cell"><img src="logos/warikoo.png" alt="Ankur Warikoo" class="h32"></div>
+        <div class="cell"><span class="nm">Dot &amp; Key</span></div>
+        <div class="cell"><span class="nm">The Batraa<br>Numerology</span></div>
+        <div class="cell"><span class="nm more">+ 96 more</span></div>
       </div>
       <div class="foot">
         <span>Aman Singh <span class="d">·</span> singh.cool</span>
