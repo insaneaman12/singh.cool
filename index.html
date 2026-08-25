@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#f6f3ea" />
+<title>Aman Singh — I find the hidden shape of things</title>
+<meta name="description" content="Aman Singh — data translator. I sit with your data until I hear what your customers were trying to tell you." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f6f3ea; --ink:#141420;
+    --ink-70:rgba(20,20,32,.72); --ink-45:rgba(20,20,32,.45); --ink-20:rgba(20,20,32,.16);
+    --blue:#2430ec; --verm:#e8501f;
+    --mono:"IBM Plex Mono",monospace;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-snap-type:y proximity; }
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Fraunces",serif; font-weight:360;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  ::selection{ background:var(--blue); color:var(--paper); }
+
+  .card{
+    min-height:100vh; min-height:100svh;
+    scroll-snap-align:start;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:13vh 8vw;
+    position:relative;
+  }
+  .card .inner{ width:100%; max-width:760px; margin:0 auto; }
+
+  /* ---- deck chrome, printed on every frame ---- */
+  .cb{
+    position:absolute; left:8vw; right:8vw;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(20,20,32,.56);
+  }
+  .cb{ bottom:calc(18px + env(safe-area-inset-bottom, 0px)); }
+  .prog{ display:flex; gap:5px; }
+  .prog i{ width:14px; height:2px; background:var(--ink-20); }
+  @media (max-width:380px){ .prog i{ width:8px; } .prog{ gap:4px; } }
+  .prog i.f{ background:var(--verm); }
+  .card.blue .cb{ color:rgba(246,243,234,.6); }
+  .card.blue .prog i{ background:rgba(246,243,234,.28); }
+  .card.blue .prog i.f{ background:#ffd9c9; }
+
+  .rise{ opacity:0; transform:translateY(12px); }
+  .rise.in{ opacity:1; transform:none; transition:transform .6s cubic-bezier(.16,1,.3,1), opacity .5s ease; }
+  @media (prefers-reduced-motion: reduce){ .rise{ opacity:1; transform:none; } }
+
+  .k{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--verm); font-weight:500; margin-bottom:3.5vh; }
+
+  .t1{
+    font-size:clamp(38px,9.6vw,88px); font-weight:340;
+    line-height:1.04; letter-spacing:-.018em; max-width:15ch;
+  }
+  .t2{
+    font-size:clamp(28px,7vw,62px); font-weight:340;
+    line-height:1.08; letter-spacing:-.015em; max-width:17ch;
+  }
+  .t3{
+    font-size:clamp(23px,5.4vw,40px); font-weight:350; font-style:italic;
+    line-height:1.28; letter-spacing:-.01em; max-width:24ch;
+  }
+  .w{ color:var(--blue); font-style:italic; }
+  .v{ color:var(--verm); font-style:italic; }
+
+  .body{
+    font-size:clamp(16px,4.2vw,21px); line-height:1.6; color:var(--ink-70); max-width:34ch;
+  }
+  .body b{ color:var(--ink); font-weight:600; }
+  .t1 + .body, .t2 + .body{ margin-top:3.5vh; }
+  .body + .body{ margin-top:2.5vh; }
+  .body + .t2{ margin-top:4vh; }
+
+  .litany p{
+    font-size:clamp(22px,5.7vw,42px); font-weight:350; line-height:1.2;
+    letter-spacing:-.011em; margin-bottom:2.2vh;
+  }
+  .litany p.seal{ margin-top:4vh; }
+  .litany p.seal b{ font-weight:350; color:var(--blue); }
+
+  .hint{
+    position:absolute; bottom:calc(50px + env(safe-area-inset-bottom, 0px)); left:50%;
+    transform:translateX(-50%);
+    font-family:var(--mono); font-size:13px; color:var(--ink-45);
+    background:none; border:1px solid var(--ink-20); border-radius:999px;
+    width:40px; height:40px; line-height:38px; text-align:center; cursor:pointer;
+  }
+  .hint:active{ transform:translateX(-50%) scale(.94); }
+
+  /* card moods */
+  .card.center{ text-align:center; }
+  .card.center .inner > *{ margin-left:auto; margin-right:auto; }
+  .card.tint-flood{ background:#eceefb; }
+  .card.tint-warm{ background:#f8efe3; }
+  .card.tint-report{
+    background:#efece2;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(20,20,32,.045) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, rgba(20,20,32,.045) 0 1px, transparent 1px 44px);
+  }
+  .card.blue{ background:var(--blue); color:var(--paper); }
+  .card.blue .t1 .w{ color:#cdd2ff; }
+  .card.blue .body{ color:rgba(246,243,234,.82); }
+  .card.blue .body b{ color:var(--paper); }
+
+  /* the gap card: two sides, held apart */
+  .gapcard .inner{ display:flex; flex-direction:column; min-height:62svh; }
+  .gapcard .sideA{ align-self:flex-start; }
+  .gapcard .sideB{ align-self:flex-end; text-align:right; }
+  .gapcard .mid{ margin:auto 0; padding:5vh 0; }
+
+  .cta{
+    display:inline-block; margin-top:5vh; text-decoration:none;
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--paper); background:var(--verm); border:1px solid var(--verm);
+    padding:17px 30px; transition:.25s;
+  }
+  .cta:hover{ background:var(--paper); color:var(--blue); border-color:var(--paper); }
+  .cta:active{ transform:scale(.97); }
+
+  /* readings: proud numerals */
+  .reads .r{ border-top:1px solid var(--ink-20); padding:3vh 0; }
+  .reads .r:last-child{ border-bottom:1px solid var(--ink-20); }
+  .reads .rb{
+    font-family:var(--mono); font-size:10px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ink-45);
+  }
+  .reads .rn{
+    font-family:var(--mono); font-size:clamp(21px,5.6vw,34px); letter-spacing:-.01em;
+    color:var(--ink); margin-top:1.2vh; font-variant-numeric:tabular-nums;
+  }
+  .reads .rn em{ font-style:normal; color:var(--verm); }
+  .reads .rs{ font-size:clamp(14px,3.6vw,17px); color:var(--ink-70); margin-top:.8vh; }
+
+  .brandwall{ margin-top:4vh; display:flex; flex-wrap:wrap; align-items:center; gap:20px 30px; }
+  .brandwall img{ width:auto; filter:grayscale(1) opacity(.72); mix-blend-mode:multiply; }
+  .brandwall span{ font-size:clamp(14px,3.6vw,18px); color:var(--ink-70); white-space:nowrap; }
+
+  .foot{
+    margin-top:6vh; padding-top:3vh; border-top:1px solid var(--ink-20);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-45);
+  }
+  .foot .d{ color:var(--verm); }
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- 01 -->
+  <section class="card">
+    <div class="inner">
+      <p class="k rise">A manifesto</p>
+      <h1 class="t1 rise">For the first time in human history, every business has <span class="w">perfect&nbsp;memory.</span></h1>
+    </div>
+    <button class="hint" id="next" type="button" aria-label="Next">↓</button>
+    <div class="cb"><span>01 / 11</span><span class="prog"><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="card litany">
+    <div class="inner">
+      <p class="rise">Every search.</p>
+      <p class="rise">Every click.</p>
+      <p class="rise">Every moment of hesitation.</p>
+      <p class="rise">Every abandoned cart.</p>
+      <p class="rise">Every ad that was seen and ignored.</p>
+      <p class="rise">Every customer who almost converted — and didn't.</p>
+      <p class="seal rise">All of it <b>recorded</b>. All of it <b>stored</b>. All of&nbsp;it&nbsp;<b>available</b>.</p>
+    </div>
+    <div class="cb"><span>02 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="card center">
+    <div class="inner">
+      <p class="t3 rise">We are living inside the most documented human experiment ever conducted.</p>
+    </div>
+    <div class="cb"><span>03 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="card tint-flood">
+    <div class="inner">
+      <h2 class="t2 rise">And businesses are <span class="w">drowning</span> in it.</h2>
+      <p class="body rise">Not because the data is wrong. Because nobody taught them how to read it.</p>
+      <p class="body rise">They built dashboards. They hired analysts. They bought tools. They generated reports.</p>
+    </div>
+    <div class="cb"><span>04 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="card tint-report">
+    <div class="inner">
+      <h2 class="t2 rise">But reports are not understanding.</h2>
+      <p class="body rise">A spreadsheet tells you what happened. It cannot tell you why a person hesitated. It cannot tell you what they were afraid of. It cannot tell you what they needed to feel before they could say yes.</p>
+      <p class="body rise">That requires something different. Not more data. <b>A different relationship with it.</b></p>
+    </div>
+    <div class="cb"><span>05 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="card gapcard">
+    <div class="inner">
+      <p class="body sideA rise">On one side: infinite information about human behaviour.</p>
+      <div class="mid rise">
+        <h2 class="t2">The gap between those two is where <span class="v">growth</span> is hiding.</h2>
+      </div>
+      <p class="body sideB rise">On the other: businesses still guessing what their customers actually want.</p>
+    </div>
+    <div class="cb"><span>06 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="card tint-warm">
+    <div class="inner">
+      <p class="body rise">Most people who work with data are archaeologists. They dig carefully. They document what they find. They write precise reports about the past.</p>
+      <h2 class="t2 rise" style="margin-top:4vh">I am not an archaeologist.</h2>
+      <h2 class="t2 rise">I am a <span class="v">translator.</span></h2>
+    </div>
+    <div class="cb"><span>07 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="card tint-warm">
+    <div class="inner">
+      <h2 class="t2 rise">I sit with your data until I hear what your customers were trying to tell&nbsp;you.</h2>
+      <p class="body rise">Until I find the hidden shape of the thing — the pattern underneath the numbers that explains not just what happened but what it means and what to do next.</p>
+      <p class="body rise">It is the rarest skill in business right now. It requires two things that almost never exist in the same person: <b>the precision to read data. And the taste to know what it means.</b></p>
+    </div>
+    <div class="cb"><span>08 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="card blue">
+    <div class="inner">
+      <h2 class="t1 rise">I find the <span class="w">hidden shape</span> of things.</h2>
+      <p class="body rise" style="margin-top:3.5vh">The hidden shape of your customer. Your market. Your next move. <b>Once you see it — everything else follows.</b></p>
+      <a class="cta rise" href="mailto:access@insanelabs.in">Bring me your data →</a>
+    </div>
+    <div class="cb"><span>09 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="card">
+    <div class="inner">
+      <p class="k rise">Three readings</p>
+      <div class="reads">
+        <div class="r rise">
+          <div class="rb">Mamaearth · revenue</div>
+          <div class="rn">₹2 lakh <em>→</em> ₹2.6 crore <span style="color:var(--ink-45)">/ month</span></div>
+        </div>
+        <div class="r rise">
+          <div class="rb">Ankur Warikoo · time-management program</div>
+          <div class="rn"><em>+</em> 2.5 lakh students</div>
+        </div>
+        <div class="r rise">
+          <div class="rb">Nethradhama · cost per walk-in</div>
+          <div class="rn">₹13,000 <em>→</em> ₹1,520</div>
+        </div>
+      </div>
+    </div>
+    <div class="cb"><span>10 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="card">
+    <div class="inner">
+      <p class="k rise">Over 110 brands across India and the GCC</p>
+      <div class="brandwall rise">
+        <img src="logos/mamaearth.png" alt="Mamaearth" style="height:20px">
+        <img src="logos/gynoveda.png" alt="Gynoveda" style="height:22px">
+        <img src="logos/joshtalks.svg" alt="Josh Talks" style="height:27px">
+        <img src="logos/mothersparsh.png" alt="Mother Sparsh" style="height:34px">
+        <img src="logos/vahdam.png" alt="Vahdam India" style="height:30px">
+        <img src="logos/nethradhama.png" alt="Nethradhama" style="height:21px">
+        <img src="logos/skillnation.png" alt="Skill Nation" style="height:27px">
+        <img src="logos/astro.png" alt="Astro Arun Pandit" style="height:38px">
+        <img src="logos/kamaayurveda.png" alt="Kama Ayurveda" style="height:36px">
+        <img src="logos/personaltouch.png" alt="Personal Touch" style="height:32px">
+        <img src="logos/growthschool.png" alt="GrowthSchool" style="height:23px">
+        <img src="logos/warikoo.png" alt="Ankur Warikoo" style="height:30px">
+        <span>Dot &amp; Key</span>
+        <span>The Batraa Numerology</span>
+      </div>
+      <div class="foot">
+        <span>Aman Singh <span class="d">·</span> singh.cool</span>
+        <span>Frozen <span class="d">·</span> 13 May 2026</span>
+      </div>
+    </div>
+    <div class="cb"><span>11 / 11</span><span class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  let pending=[...document.querySelectorAll('.rise')];
+  function reveal(){
+    if(!pending.length) return;
+    const vh=innerHeight;
+    pending=pending.filter(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<vh*.94 && r.bottom>0){ el.classList.add('in'); return false; }
+      return true;
+    });
+  }
+  let raf=null;
+  addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=null; reveal(); }); },{passive:true});
+  setInterval(reveal, 300);
+  reveal();
+  const nx=document.getElementById('next');
+  if(nx) nx.addEventListener('click',()=>{
+    const cards=[...document.querySelectorAll('.card')];
+    const c=cards.find(el=>el.getBoundingClientRect().top>10);
+    if(c) c.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
