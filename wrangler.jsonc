@@ -1,0 +1,7 @@
+{
+  "name": "singh-cool-home",
+  "compatibility_date": "2026-06-01",
+  "assets": { "directory": "./site" },
+  "workers_dev": false,
+  "routes": [{ "pattern": "singh.cool/*", "zone_name": "singh.cool" }]
+}
