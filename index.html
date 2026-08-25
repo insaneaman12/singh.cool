@@ -17,7 +17,7 @@
     --mono:"IBM Plex Mono",monospace;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-snap-type:y proximity; }
+  html{ scroll-snap-type:y mandatory; }
   body{
     background:var(--paper); color:var(--ink);
     font-family:"Fraunces",serif; font-weight:360;
@@ -26,7 +26,7 @@
   ::selection{ background:var(--blue); color:var(--paper); }
 
   .card{
-    min-height:100vh; min-height:100svh;
+    height:100vh; height:100svh; overflow:hidden;
     scroll-snap-align:start;
     display:flex; flex-direction:column; justify-content:center;
     padding:13vh 8vw;
@@ -86,20 +86,11 @@
   .litany p.seal{ margin-top:4vh; }
   .litany p.seal b{ font-weight:350; color:var(--blue); }
 
-  .hint{
-    position:absolute; bottom:calc(50px + env(safe-area-inset-bottom, 0px)); left:50%;
-    transform:translateX(-50%);
-    font-family:var(--mono); font-size:13px; color:var(--ink-45);
-    background:none; border:1px solid var(--ink-20); border-radius:999px;
-    width:40px; height:40px; line-height:38px; text-align:center; cursor:pointer;
-  }
-  .hint:active{ transform:translateX(-50%) scale(.94); }
+  .card.tall{ height:auto; min-height:100svh; overflow:visible; }
 
   /* card moods */
   .card.center{ text-align:center; }
   .card.center .inner > *{ margin-left:auto; margin-right:auto; }
-  .card.tint-flood{ background:#eceefb; }
-  .card.tint-warm{ background:#f8efe3; }
   .card.tint-report{
     background:#efece2;
     background-image:
@@ -107,6 +98,14 @@
       repeating-linear-gradient(90deg, rgba(20,20,32,.045) 0 1px, transparent 1px 44px);
   }
   .card.blue{ background:var(--blue); color:var(--paper); }
+  .card.blue .t2 .w{ color:#cdd2ff; }
+  .card.verm{ background:var(--verm); color:var(--paper); }
+  .card.verm .t2 .v{ color:#ffd9c9; }
+  .card.verm .body{ color:rgba(246,243,234,.85); }
+  .card.verm .body b{ color:var(--paper); }
+  .card.verm .cb{ color:rgba(246,243,234,.65); }
+  .card.verm .prog i{ background:rgba(246,243,234,.3); }
+  .card.verm .prog i.f{ background:#ffd9c9; }
   .card.blue .t1 .w{ color:#cdd2ff; }
   .card.blue .body{ color:rgba(246,243,234,.82); }
   .card.blue .body b{ color:var(--paper); }
@@ -162,7 +161,6 @@
       <p class="k rise">A manifesto</p>
       <h1 class="t1 rise">For the first time in human history, every business has <span class="w">perfect&nbsp;memory.</span></h1>
     </div>
-    <button class="hint" id="next" type="button" aria-label="Next">↓</button>
     <div class="cb"><span>01 / 11</span><span class="prog"><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
   </section>
 
@@ -189,7 +187,7 @@
   </section>
 
   <!-- 04 -->
-  <section class="card tint-flood">
+  <section class="card blue">
     <div class="inner">
       <h2 class="t2 rise">And businesses are <span class="w">drowning</span> in it.</h2>
       <p class="body rise">Not because the data is wrong. Because nobody taught them how to read it.</p>
@@ -221,7 +219,7 @@
   </section>
 
   <!-- 07 -->
-  <section class="card tint-warm">
+  <section class="card verm">
     <div class="inner">
       <p class="body rise">Most people who work with data are archaeologists. They dig carefully. They document what they find. They write precise reports about the past.</p>
       <h2 class="t2 rise" style="margin-top:4vh">I am not an archaeologist.</h2>
@@ -231,7 +229,7 @@
   </section>
 
   <!-- 08 -->
-  <section class="card tint-warm">
+  <section class="card">
     <div class="inner">
       <h2 class="t2 rise">I sit with your data until I hear what your customers were trying to tell&nbsp;you.</h2>
       <p class="body rise">Until I find the hidden shape of the thing — the pattern underneath the numbers that explains not just what happened but what it means and what to do next.</p>
@@ -273,7 +271,7 @@
   </section>
 
   <!-- 11 -->
-  <section class="card">
+  <section class="card tall">
     <div class="inner">
       <p class="k rise">Over 110 brands across India and the GCC</p>
       <div class="brandwall rise">
@@ -318,12 +316,6 @@
   addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=null; reveal(); }); },{passive:true});
   setInterval(reveal, 300);
   reveal();
-  const nx=document.getElementById('next');
-  if(nx) nx.addEventListener('click',()=>{
-    const cards=[...document.querySelectorAll('.card')];
-    const c=cards.find(el=>el.getBoundingClientRect().top>10);
-    if(c) c.scrollIntoView({behavior:'smooth',block:'start'});
-  });
 })();
 </script>
 </body>
